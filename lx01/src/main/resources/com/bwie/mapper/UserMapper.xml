@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namepace要求唯一，避免重复 -->
+<mapper namespace="com.bwie.mapper.UserMapper">
+	
+	<select id="seleAll" resultType="UserExt" parameterType="string">
+		select u.*,s.sid,s.sprice,group_concat(s.sname)sname  from user u left join zj z on u.uid=z.uid 
+		left join shop s on z.sid=s.sid where u.uname like "%${hname}%" group by u.uid
+	</select>
+	
+	<select id="seleShop" resultType="Shop">
+		select * from shop
+	</select>
+	
+</mapper>
